@@ -1,0 +1,43 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+//define our dependencies
+dependencies {
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.guava:guava:18.0'
+    compile 'joda-time:joda-time:2.5'
+    compile 'junit:junit:4.11'
+
+    //slf4J logging
+    ['slf4j-api'].each {
+        compile("org.slf4j:${it}:1.7.7")
+    }
+
+    //slf4J logging
+    ['jcl-over-slf4j','log4j-over-slf4j','slf4j-jdk14'].each {
+        runtime("org.slf4j:${it}:1.7.7")
+    }
+
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    // should be providedCompile when building a war
+    // providedCompile 'com.google.appengine:appengine-api-1.0-sdk:1.9.17'
+}
+
+//basename for generated jar and war
+//archivesBaseName = 'gilead'
+
+//override the compiler options
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7' 
+compileJava {
+    options.depend()
+    options.fork(memoryInitialSize: "256M", memoryMaximumSize: "512M")
+    options.debug(debugLevel: "lines,vars,source")
+}
+

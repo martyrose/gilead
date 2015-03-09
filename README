@@ -1,0 +1,20 @@
+playground-855
+
+rm -Rf build/gae-war
+mkdir build/gae-war
+unzip build/libs/gilead.war -d build/gae-war
+
+~/projects/appengine-java-sdk-1.9.17/bin/appcfg.sh --oauth2 update build/gae-war
+
+
+https://appengine.google.com/dashboard
+http://playground-855.appspot.com/
+
+
+Notes on Setup
+new console doesn't call it application id => project id
+appcfg doesn't accept a war?!?!?!
+Cant figure out how to login (2 factor auth messed me up)
+Couldn't find my external URL
+
+
